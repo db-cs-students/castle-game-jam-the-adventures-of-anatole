@@ -4,7 +4,7 @@ Creators: James & Eric
 Description:
 
  */
-/** SPRITE (ANATOLE!) */
+//  anatole
 let anatole = sprites.create(img`
     2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
     2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
@@ -24,13 +24,27 @@ let anatole = sprites.create(img`
     2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
 `)
 scene.cameraFollowSprite(anatole)
-/** CONTROLLER STUFF */
-controller.A.onEvent(ControllerButtonEvent.Pressed, function on_a_pressed() {
-    anatole.vy = -70
+//  Controller Stuff
+controller.moveSprite(anatole, 125, 0)
+let can_double_jump = true
+controller.A.onEvent(ControllerButtonEvent.Pressed, function jump() {
+    
+    if (can_double_jump) {
+        anatole.vy = -100
+    }
+    
+    can_double_jump = anatole.isHittingTile(CollisionDirection.Bottom)
 })
-controller.moveSprite(anatole)
-anatole.ay = 125
-/** TILE MAP */
+function on_update() {
+    
+    if (anatole.isHittingTile(CollisionDirection.Bottom)) {
+        can_double_jump = true
+    }
+    
+}
+
+anatole.ay = 110
+//  Tile Map Stuff
 scene.setTileMap(img`
     ................................................................
     ................................................................
@@ -55,17 +69,17 @@ scene.setTileMap(img`
     ................................................................
     ................................................................
     ................................................................
-    4444444444444444444444444444444444444444444444444444444444444444
-    4444444444444444444444444444444444444444444444444444444444444444
-    4444444444444444444444444444444444444444444444444444444444444444
     ................................................................
     ................................................................
     ................................................................
     ................................................................
+    ................................................................
+    ................................................................
+    3333333333333333333333333333333333333333333333333333333333333333
     ................................................................
     ................................................................
 `)
-scene.setTile(4, img`
+scene.setTile(3, img`
     4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
     4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
     4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4

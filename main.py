@@ -4,9 +4,8 @@ Creators: James & Eric
 Description:
 """
 
-"""
-SPRITE (ANATOLE!)
-"""
+# anatole
+
 anatole = sprites.create(img("""
     2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
     2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
@@ -27,20 +26,25 @@ anatole = sprites.create(img("""
 """))
 scene.camera_follow_sprite(anatole)
 
-"""
-CONTROLLER STUFF
-"""
-def on_a_pressed():
-    anatole.vy = -70
-controller.A.on_event(ControllerButtonEvent.PRESSED, on_a_pressed)
+# Controller Stuff
 
-controller.move_sprite(anatole)
+controller.move_sprite(anatole, 125,0)
+can_double_jump = True
+def jump():
+    global can_double_jump
+    if can_double_jump:
+     anatole.vy = -100
+    can_double_jump = anatole.is_hitting_tile(CollisionDirection.BOTTOM)
+controller.A.on_event(ControllerButtonEvent.PRESSED, jump)
 
-anatole.ay = 125
+def on_update():
+    global can_double_jump
+    if anatole.is_hitting_tile(CollisionDirection.BOTTOM):
+        can_double_jump = True
 
-"""
-TILE MAP 
-"""
+anatole.ay = 110
+
+# Tile Map Stuff
 
 scene.set_tile_map(img("""
     ................................................................
@@ -66,17 +70,17 @@ scene.set_tile_map(img("""
     ................................................................
     ................................................................
     ................................................................
-    4444444444444444444444444444444444444444444444444444444444444444
-    4444444444444444444444444444444444444444444444444444444444444444
-    4444444444444444444444444444444444444444444444444444444444444444
     ................................................................
     ................................................................
     ................................................................
     ................................................................
+    ................................................................
+    ................................................................
+    3333333333333333333333333333333333333333333333333333333333333333
     ................................................................
     ................................................................
 """))
-scene.set_tile(4, img("""
+scene.set_tile(3, img("""
     4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
     4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
     4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
