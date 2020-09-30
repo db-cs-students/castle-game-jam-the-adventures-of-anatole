@@ -4,7 +4,7 @@ Creators: James & Eric
 Description:
 
  */
-//  anatole
+// Anatole and Camera Stuff
 let anatole = sprites.create(img`
     2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
     2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
@@ -22,9 +22,11 @@ let anatole = sprites.create(img`
     2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
     2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
     2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-`)
+`, SpriteKind.Player)
 scene.cameraFollowSprite(anatole)
-//  Controller Stuff
+// Spawn Position Stuff
+anatole.setPosition(0, 0)
+//  Double Jump Function & Movement
 controller.moveSprite(anatole, 125, 0)
 let can_double_jump = true
 controller.A.onEvent(ControllerButtonEvent.Pressed, function jump() {
@@ -44,6 +46,32 @@ function on_update() {
 }
 
 anatole.ay = 110
+// Health Function & Score Function
+info.setLife(3)
+info.setScore(0)
+// Lava Obstacle
+scene.setTile(2, img`
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+`, true)
+scene.onHitTile(SpriteKind.Player, 2, function on_hit_tile(sprite: Sprite) {
+    sprite.setPosition(sprite.x - 100, sprite.y)
+    info.player1.changeLifeBy(-1)
+})
 //  Tile Map Stuff
 scene.setTileMap(img`
     ................................................................
@@ -75,7 +103,7 @@ scene.setTileMap(img`
     ................................................................
     ................................................................
     ................................................................
-    3333333333333333333333333333333333333333333333333333333333333333
+    3333333332222233333333333333333333333333333333333333333333333333
     ................................................................
     ................................................................
 `)
