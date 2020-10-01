@@ -17,13 +17,37 @@ let anatole = sprites.create(img`
     . . . . . . d d d . . . . . . .
     . 2 2 5 5 2 2 2 2 2 5 5 2 2 . .
     . 2 2 2 2 2 2 5 2 2 2 2 2 2 . .
-    . d d 2 2 2 2 2 2 2 2 2 d d . .
-    . d d 2 2 2 2 5 2 2 2 2 d d . .
+    . d d 2 2 2 2 2 2 2 2 2 d f f f
+    . d d 2 2 2 2 5 2 2 2 2 d f . .
     . . . 2 2 2 2 2 2 2 2 2 . . . .
     . . . . f f . . . f f . . . . .
     . . . f f f . . . f f f . . . .
 `, SpriteKind.Player)
 scene.cameraFollowSprite(anatole)
+// anatole shooty shoot 
+controller.B.onEvent(ControllerButtonEvent.Pressed, function on_event_pressed() {
+    let projectile = sprites.createProjectileFromSprite(img`
+      . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . .
+      . . . . . . . 5 . . . . . . . .
+      . . . . 5 . . 5 5 . . . . . . .
+      . . . . 5 5 5 5 . 5 5 5 . . . .
+      . . . . . . . 5 5 5 . . 5 5 . .
+      . . . 5 5 5 5 5 5 5 5 5 5 5 5 .
+      . . 5 5 5 5 5 5 . . 5 5 5 5 . .
+      . . 5 5 . . . . 5 5 5 . . . . .
+      . . . . . 5 5 5 5 . . . . . . .
+      . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . .
+  `, anatole, 99999, 0)
+})
+controller.B.onEvent(ControllerButtonEvent.Pressed, function on_event_pressed2() {
+    music.baDing.play()
+})
 //  Double Jump Function & Movement
 controller.moveSprite(anatole, 100, 0)
 let can_double_jump = true

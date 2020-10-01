@@ -17,13 +17,39 @@ anatole = sprites.create(img("""
     . . . . . . d d d . . . . . . .
     . 2 2 5 5 2 2 2 2 2 5 5 2 2 . .
     . 2 2 2 2 2 2 5 2 2 2 2 2 2 . .
-    . d d 2 2 2 2 2 2 2 2 2 d d . .
-    . d d 2 2 2 2 5 2 2 2 2 d d . .
+    . d d 2 2 2 2 2 2 2 2 2 d f f f
+    . d d 2 2 2 2 5 2 2 2 2 d f . .
     . . . 2 2 2 2 2 2 2 2 2 . . . .
     . . . . f f . . . f f . . . . .
     . . . f f f . . . f f f . . . .
 """), SpriteKind.player)
 scene.camera_follow_sprite(anatole)
+
+#anatole shooty shoot 
+def on_event_pressed():
+  projectile = sprites.create_projectile_from_sprite(img("""
+      . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . .
+      . . . . . . . 5 . . . . . . . .
+      . . . . 5 . . 5 5 . . . . . . .
+      . . . . 5 5 5 5 . 5 5 5 . . . .
+      . . . . . . . 5 5 5 . . 5 5 . .
+      . . . 5 5 5 5 5 5 5 5 5 5 5 5 .
+      . . 5 5 5 5 5 5 . . 5 5 5 5 . .
+      . . 5 5 . . . . 5 5 5 . . . . .
+      . . . . . 5 5 5 5 . . . . . . .
+      . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . .
+  """), anatole, 99999, 0)  
+controller.B.on_event(ControllerButtonEvent.PRESSED, on_event_pressed)
+
+def on_event_pressed2():  
+    music.ba_ding.play()
+controller.B.on_event(ControllerButtonEvent.PRESSED, on_event_pressed2)
 
 # Double Jump Function & Movement
 controller.move_sprite(anatole, 100,0)
