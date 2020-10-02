@@ -32,21 +32,18 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function on_event_pressed() 
       . . . . . . . . . . . . . . . .
       . . . . . . . . . . . . . . . .
       . . . . . . . . . . . . . . . .
-      . . . . . . . 5 . . . . . . . .
-      . . . . 5 . . 5 5 . . . . . . .
-      . . . . 5 5 5 5 . 5 5 5 . . . .
+      . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . .
       . . . . . . . 5 5 5 . . 5 5 . .
-      . . . 5 5 5 5 5 5 5 5 5 5 5 5 .
-      . . 5 5 5 5 5 5 . . 5 5 5 5 . .
-      . . 5 5 . . . . 5 5 5 . . . . .
-      . . . . . 5 5 5 5 . . . . . . .
+      . . . . 5 5 5 5 5 5 5 5 5 5 5 .
+      . . . . 5 5 5 5 . . 5 5 5 5 . .
+      . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . .
       . . . . . . . . . . . . . . . .
       . . . . . . . . . . . . . . . .
       . . . . . . . . . . . . . . . .
   `, anatole, 99999, 0)
-})
-controller.B.onEvent(ControllerButtonEvent.Pressed, function on_event_pressed2() {
-    music.baDing.play()
 })
 //  Double Jump Function & Movement
 controller.moveSprite(anatole, 100, 0)
@@ -59,14 +56,13 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function jump() {
     
     can_double_jump = anatole.isHittingTile(CollisionDirection.Bottom)
 })
-function on_update() {
+game.onUpdate(function on_update() {
     
     if (anatole.isHittingTile(CollisionDirection.Bottom)) {
         can_double_jump = true
     }
     
-}
-
+})
 anatole.ay = 200
 // Health Function & Score Function
 info.setLife(3)

@@ -33,23 +33,20 @@ def on_event_pressed():
       . . . . . . . . . . . . . . . .
       . . . . . . . . . . . . . . . .
       . . . . . . . . . . . . . . . .
-      . . . . . . . 5 . . . . . . . .
-      . . . . 5 . . 5 5 . . . . . . .
-      . . . . 5 5 5 5 . 5 5 5 . . . .
+      . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . .
       . . . . . . . 5 5 5 . . 5 5 . .
-      . . . 5 5 5 5 5 5 5 5 5 5 5 5 .
-      . . 5 5 5 5 5 5 . . 5 5 5 5 . .
-      . . 5 5 . . . . 5 5 5 . . . . .
-      . . . . . 5 5 5 5 . . . . . . .
+      . . . . 5 5 5 5 5 5 5 5 5 5 5 .
+      . . . . 5 5 5 5 . . 5 5 5 5 . .
+      . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . .
       . . . . . . . . . . . . . . . .
       . . . . . . . . . . . . . . . .
       . . . . . . . . . . . . . . . .
   """), anatole, 99999, 0)  
 controller.B.on_event(ControllerButtonEvent.PRESSED, on_event_pressed)
 
-def on_event_pressed2():  
-    music.ba_ding.play()
-controller.B.on_event(ControllerButtonEvent.PRESSED, on_event_pressed2)
 
 # Double Jump Function & Movement
 controller.move_sprite(anatole, 100,0)
@@ -65,7 +62,7 @@ def on_update():
     global can_double_jump
     if anatole.is_hitting_tile(CollisionDirection.BOTTOM):
         can_double_jump = True
-
+game.on_update(on_update)
 anatole.ay = 200
 
 #Health Function & Score Function
